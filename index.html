@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đánh Giá KPI Lò Hơi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              slate: { 
+                850: '#1e293b',
+                950: '#020617'
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+      body { font-family: 'Inter', sans-serif; }
+      
+      @media print {
+        @page { 
+          size: A4; 
+          margin: 0; 
+        }
+        
+        /* 
+         1. Hide everything by default using visibility to keep layout calculation if needed, 
+            but usually display:none for body children works best.
+            Here we use a combination: Hide body content, Show print dashboard.
+        */
+        body {
+          visibility: hidden;
+        }
+
+        /* 2. Show the printable dashboard */
+        #printable-dashboard {
+          visibility: visible !important;
+          display: block !important; /* Critical: override Tailwind 'hidden' class */
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 210mm !important; /* Enforce A4 Width */
+          min-height: 297mm !important;
+          margin: 0;
+          padding: 0;
+          z-index: 9999;
+          background: white;
+        }
+
+        /* 3. Ensure all children of dashboard are visible */
+        #printable-dashboard * {
+          visibility: visible !important;
+        }
+
+        /* 4. Reset scrollbars */
+        ::-webkit-scrollbar { display: none; }
+        
+        /* 5. Ensure colors print */
+        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.5.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.1/package/xlsx.mjs"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+    <div id="root"></div>
+  </body>
+</html>
