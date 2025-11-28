@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import InputSection from './components/InputSection';
 import ResultsPanel from './components/ResultsPanel';
 import { EvaluationState, RatingLevel } from './types';
-import { Factory, Moon, Sun, User, Building2, Briefcase, IdCard, Calendar, Upload, Image as ImageIcon } from 'lucide-react';
+import { Factory, Moon, Sun, User, Building2, Briefcase, IdCard, Calendar, Upload, Image as ImageIcon, Info } from 'lucide-react';
 
 export interface EmployeeInfo {
   name: string;
@@ -222,6 +222,48 @@ function App() {
               onRate={handleRate} 
               onNoteChange={handleNoteChange} 
             />
+
+            {/* Ranking Legend Section */}
+            <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 transition-colors duration-300">
+               <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 uppercase mb-4 flex items-center gap-2">
+                 <Info size={18} className="text-blue-500" /> 
+                 Tiêu chuẩn xếp loại
+               </h3>
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="flex flex-col gap-2 p-4 rounded-lg border border-green-200 bg-green-50 dark:bg-green-900/20 dark:border-green-800/50">
+                     <div className="flex items-center gap-2">
+                        <div className="w-2 h-8 rounded-full bg-green-500"></div>
+                        <div>
+                          <div className="font-bold text-green-700 dark:text-green-400 text-lg">Tốt</div>
+                          <div className="text-xs font-semibold text-green-600 dark:text-green-500">80% - 100%</div>
+                        </div>
+                     </div>
+                     <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Hoàn thành xuất sắc nhiệm vụ, vượt chỉ tiêu, không có sự cố.</p>
+                  </div>
+
+                  <div className="flex flex-col gap-2 p-4 rounded-lg border border-yellow-200 bg-yellow-50 dark:bg-yellow-900/20 dark:border-yellow-800/50">
+                     <div className="flex items-center gap-2">
+                        <div className="w-2 h-8 rounded-full bg-yellow-500"></div>
+                        <div>
+                          <div className="font-bold text-yellow-700 dark:text-yellow-400 text-lg">Trung bình</div>
+                          <div className="text-xs font-semibold text-yellow-600 dark:text-yellow-500">60% - &lt;80%</div>
+                        </div>
+                     </div>
+                     <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Hoàn thành nhiệm vụ ở mức cơ bản, có sai sót nhỏ nhưng đã khắc phục.</p>
+                  </div>
+
+                  <div className="flex flex-col gap-2 p-4 rounded-lg border border-red-200 bg-red-50 dark:bg-red-900/20 dark:border-red-800/50">
+                     <div className="flex items-center gap-2">
+                        <div className="w-2 h-8 rounded-full bg-red-500"></div>
+                        <div>
+                          <div className="font-bold text-red-700 dark:text-red-400 text-lg">Yếu</div>
+                          <div className="text-xs font-semibold text-red-600 dark:text-red-500">&lt;60%</div>
+                        </div>
+                     </div>
+                     <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Không hoàn thành nhiệm vụ, vi phạm quy trình hoặc gây sự cố nghiêm trọng.</p>
+                  </div>
+               </div>
+            </div>
           </div>
 
           {/* Right Column: Results & Tools */}

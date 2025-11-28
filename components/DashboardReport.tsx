@@ -45,11 +45,10 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
   const defaultLogo = "https://placehold.co/400x150/ffffff/0047AB?text=TRIVIET+BIOGEN&font=poppins";
 
   return (
-    // Changed w-[210mm] to w-full so it adapts to the parent container (which is set to 210mm in ResultsPanel)
-    // Kept compact padding and font sizes
-    <div className="bg-white text-slate-900 font-sans w-full p-[5mm] relative">
+    // Sử dụng flex flex-col và min-h để đẩy phần chân trang xuống dưới cùng
+    <div className="bg-white text-slate-900 font-sans w-full min-h-[280mm] p-[5mm] relative flex flex-col">
       {/* --- HEADER --- */}
-      <div className="flex border-b-2 border-slate-900 pb-3 mb-3 items-center">
+      <div className="flex border-b-2 border-slate-900 pb-3 mb-3 items-center shrink-0">
         <div className="w-1/4 flex flex-col items-center justify-center border-r border-slate-200 pr-4">
            {/* LOGO AREA */}
            <img 
@@ -71,8 +70,8 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
         </div>
       </div>
 
-      {/* --- EMPLOYEE INFO (Single Row Compact) --- */}
-      <div className="bg-slate-50 border border-slate-200 rounded p-3 mb-3 grid grid-cols-4 gap-4 text-[10px]">
+      {/* --- EMPLOYEE INFO --- */}
+      <div className="bg-slate-50 border border-slate-200 rounded p-3 mb-3 grid grid-cols-4 gap-4 text-[10px] shrink-0">
          <div className="flex flex-col border-r border-slate-200 pr-2">
             <span className="text-slate-500 uppercase text-[9px] mb-0.5">Họ và tên</span>
             <span className="font-bold uppercase text-blue-900 text-xs">{employeeInfo.name || '................................'}</span>
@@ -91,8 +90,8 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
          </div>
       </div>
 
-      {/* --- DASHBOARD VISUALS (Adjusted Height to h-40) --- */}
-      <div className="grid grid-cols-3 gap-3 mb-3 h-40">
+      {/* --- DASHBOARD VISUALS --- */}
+      <div className="grid grid-cols-3 gap-3 mb-3 h-40 shrink-0">
          {/* KPI SCORE CARD */}
          <div className="col-span-1 bg-white rounded border border-slate-200 p-2 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-sm">
             <div className="absolute top-0 right-0 p-1 opacity-5">
@@ -110,7 +109,7 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
             </div>
          </div>
 
-         {/* PIE CHART (Donut Style - Replacing Radar) */}
+         {/* PIE CHART */}
          <div className="col-span-1 border border-slate-200 rounded p-1 relative shadow-sm flex items-center justify-center">
             <div className="absolute top-1 left-2 text-[8px] font-bold text-slate-500 uppercase tracking-wider">Cơ cấu điểm</div>
             <PieChart width={240} height={160}>
@@ -145,7 +144,7 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
             </PieChart>
          </div>
 
-         {/* BAR CHART (Vertical Columns - Dark Blue Theme) */}
+         {/* BAR CHART */}
          <div className="col-span-1 border border-slate-200 rounded p-1 relative shadow-sm flex items-center justify-center">
             <div className="absolute top-1 left-2 text-[8px] font-bold text-slate-500 uppercase tracking-wider">Chi tiết theo mục</div>
             <BarChart width={240} height={160} data={categoryScores} margin={{ top: 25, right: 5, left: -20, bottom: 0 }}>
@@ -159,8 +158,8 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
          </div>
       </div>
 
-      {/* --- DETAILED TABLE (Condensed with p-1 padding) --- */}
-      <div className="mb-3">
+      {/* --- DETAILED TABLE --- */}
+      <div className="mb-3 shrink-0">
          <h3 className="text-[10px] font-bold text-white bg-blue-900 uppercase py-1 px-2 mb-0 rounded-t inline-block">Bảng điểm chi tiết</h3>
          <div className="border-t-2 border-blue-900">
             <table className="w-full text-[9px] border-collapse">
@@ -201,7 +200,7 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
                                         rating.level === 'AVERAGE' ? 'bg-yellow-50 text-yellow-700 border-yellow-200' :
                                         'bg-red-50 text-red-700 border-red-200'
                                         }`}>
-                                        {rating.level === 'GOOD' ? 'TỐT' : rating.level === 'AVERAGE' ? 'KHÁ' : 'YẾU'}
+                                        {rating.level === 'GOOD' ? 'TỐT' : rating.level === 'AVERAGE' ? 'T.BÌNH' : 'YẾU'}
                                         </span>
                                     ) : <span className="text-slate-300">-</span>}
                                 </td>
@@ -217,7 +216,7 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
       </div>
 
       {/* --- SIGNATURES (Bottom Positioned) --- */}
-      <div className="grid grid-cols-3 gap-8 mt-auto pt-2">
+      <div className="grid grid-cols-3 gap-8 mt-auto pt-2 shrink-0">
          <div className="text-center">
             <div className="font-bold text-[9px] uppercase mb-12 text-slate-800">Người được đánh giá</div>
             <div className="border-t border-slate-300 w-24 mx-auto pt-1 text-[9px] font-bold text-slate-900 uppercase">
