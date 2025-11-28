@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import InputSection from './components/InputSection';
 import ResultsPanel from './components/ResultsPanel';
 import { EvaluationState, RatingLevel } from './types';
-import { Factory, Moon, Sun, User, Building2, Briefcase, IdCard, Calendar } from 'lucide-react';
+import { Factory, Moon, Sun, User, Building2, Briefcase, IdCard, Calendar, Upload, Image as ImageIcon } from 'lucide-react';
 
 export interface EmployeeInfo {
   name: string;
@@ -16,6 +16,7 @@ function App() {
   const [ratings, setRatings] = useState<EvaluationState>({});
   const [selectedMonth, setSelectedMonth] = useState<string>(new Date().toISOString().slice(0, 7));
   const [darkMode, setDarkMode] = useState(false);
+  const [companyLogo, setCompanyLogo] = useState<string | null>(null);
   
   // State cho thông tin nhân viên
   const [employeeInfo, setEmployeeInfo] = useState<EmployeeInfo>({
@@ -65,6 +66,17 @@ function App() {
     setEmployeeInfo(prev => ({ ...prev, [field]: value }));
   };
 
+  const handleLogoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCompanyLogo(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="min-h-screen pb-12 print:pb-0 print:bg-white transition-colors duration-300">
       {/* Header */}
@@ -101,10 +113,31 @@ function App() {
             
             {/* Employee Info Form */}
             <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6">
-              <h2 className="text-lg font-bold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
-                <User className="w-5 h-5 text-blue-500" />
-                Thông tin nhân viên
-              </h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                  <User className="w-5 h-5 text-blue-500" />
+                  Thông tin nhân viên
+                </h2>
+                
+                {/* Logo Upload Button */}
+                <div className="relative">
+                  <input 
+                    type="file" 
+                    id="logo-upload" 
+                    accept="image/*" 
+                    className="hidden" 
+                    onChange={handleLogoUpload}
+                  />
+                  <label 
+                    htmlFor="logo-upload" 
+                    className="cursor-pointer flex items-center gap-2 text-xs font-medium bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 px-3 py-1.5 rounded-lg transition-colors border border-slate-200 dark:border-slate-700"
+                  >
+                    {companyLogo ? <ImageIcon size={14} className="text-green-500" /> : <Upload size={14} />}
+                    {companyLogo ? 'Đổi Logo' : 'Tải Logo'}
+                  </label>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="text-xs font-medium text-slate-500 dark:text-slate-400 flex items-center gap-1">
@@ -197,6 +230,7 @@ function App() {
               ratings={ratings} 
               selectedMonth={selectedMonth} 
               employeeInfo={employeeInfo}
+              logoUrl={companyLogo}
             />
           </div>
 

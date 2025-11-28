@@ -24,6 +24,7 @@ interface DashboardReportProps {
   ranking: string;
   categoryScores: any[];
   employeeInfo: EmployeeInfo;
+  logoUrl: string | null;
 }
 
 const DashboardReport: React.FC<DashboardReportProps> = ({
@@ -34,12 +35,14 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
   percent,
   ranking,
   categoryScores,
-  employeeInfo
+  employeeInfo,
+  logoUrl
 }) => {
   const [year, month] = selectedMonth.split('-');
   const reportDateObj = employeeInfo.reportDate ? new Date(employeeInfo.reportDate) : new Date();
 
   const COLORS = ['#3b82f6', '#22c55e', '#eab308', '#f97316'];
+  const defaultLogo = "https://placehold.co/400x150/ffffff/0047AB?text=TRIVIET+BIOGEN&font=poppins";
 
   return (
     // Changed w-[210mm] to w-full so it adapts to the parent container (which is set to 210mm in ResultsPanel)
@@ -50,11 +53,11 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
         <div className="w-1/4 flex flex-col items-center justify-center border-r border-slate-200 pr-4">
            {/* LOGO AREA */}
            <img 
-              src="https://placehold.co/400x150/ffffff/0047AB?text=TRIVIET+BIOGEN&font=poppins" 
-              alt="TRIVIET BIOGEN Logo" 
-              className="w-full max-h-12 object-contain"
+              src={logoUrl || defaultLogo} 
+              alt="Logo" 
+              className="w-full max-h-16 object-contain"
            />
-           <div className="text-[7px] text-green-600 mt-1 font-bold uppercase tracking-widest text-center">Năng lượng sạch, vì một tương lai xanh</div>
+           {!logoUrl && <div className="text-[7px] text-green-600 mt-1 font-bold uppercase tracking-widest text-center">Năng lượng sạch, vì một tương lai xanh</div>}
         </div>
         <div className="w-3/4 pl-5 flex flex-col justify-center">
            <h1 className="text-2xl font-bold text-blue-900 uppercase tracking-wide">Báo Cáo Hiệu Quả Công Việc (KPI)</h1>
@@ -88,8 +91,8 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
          </div>
       </div>
 
-      {/* --- DASHBOARD VISUALS (Expanded Height for Clarity) --- */}
-      <div className="grid grid-cols-3 gap-3 mb-3 h-44">
+      {/* --- DASHBOARD VISUALS (Adjusted Height to h-40) --- */}
+      <div className="grid grid-cols-3 gap-3 mb-3 h-40">
          {/* KPI SCORE CARD */}
          <div className="col-span-1 bg-white rounded border border-slate-200 p-2 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-sm">
             <div className="absolute top-0 right-0 p-1 opacity-5">
@@ -156,7 +159,7 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
          </div>
       </div>
 
-      {/* --- DETAILED TABLE (Condensed) --- */}
+      {/* --- DETAILED TABLE (Condensed with p-1 padding) --- */}
       <div className="mb-3">
          <h3 className="text-[10px] font-bold text-white bg-blue-900 uppercase py-1 px-2 mb-0 rounded-t inline-block">Bảng điểm chi tiết</h3>
          <div className="border-t-2 border-blue-900">

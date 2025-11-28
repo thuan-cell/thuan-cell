@@ -16,6 +16,7 @@ export interface KPIItem {
   name: string;
   maxPoints: number;
   unit: string; // e.g., "10đ"
+  checklist?: string[]; // Added field for detailed bullet points
   criteria: {
     [RatingLevel.GOOD]: KPILevelDetail;
     [RatingLevel.AVERAGE]: KPILevelDetail;

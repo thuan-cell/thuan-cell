@@ -22,9 +22,10 @@ interface ResultsPanelProps {
   ratings: EvaluationState;
   selectedMonth: string;
   employeeInfo: EmployeeInfo;
+  logoUrl: string | null;
 }
 
-const ResultsPanel: React.FC<ResultsPanelProps> = ({ ratings, selectedMonth, employeeInfo }) => {
+const ResultsPanel: React.FC<ResultsPanelProps> = ({ ratings, selectedMonth, employeeInfo, logoUrl }) => {
   const [showPreview, setShowPreview] = useState(false);
   const [isDownloadingPdf, setIsDownloadingPdf] = useState(false);
 
@@ -272,6 +273,7 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({ ratings, selectedMonth, emp
                      ranking={ranking}
                      categoryScores={categoryScores}
                      employeeInfo={employeeInfo}
+                     logoUrl={logoUrl}
                   />
                </div>
             </div>
@@ -293,6 +295,7 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({ ratings, selectedMonth, emp
              ranking={ranking}
              categoryScores={categoryScores}
              employeeInfo={employeeInfo}
+             logoUrl={logoUrl}
           />
       </div>
     </>
