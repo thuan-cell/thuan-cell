@@ -102,9 +102,9 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
             <div className="text-5xl font-extrabold text-blue-900 leading-none mb-1">{Number(totalScore).toFixed(2)}</div>
             <div className="text-slate-400 text-[10px] font-medium mb-3">/ {maxTotalScore} điểm tối đa</div>
             <div className={`px-4 py-1 rounded-full text-[10px] font-bold border ${
-               percent >= 95 ? 'bg-green-100 text-green-800 border-green-200' :
-               percent >= 80 ? 'bg-blue-100 text-blue-800 border-blue-200' :
-               'bg-orange-100 text-orange-800 border-orange-200'
+               percent >= 80 ? 'bg-green-100 text-green-800 border-green-200' :
+               percent >= 60 ? 'bg-yellow-100 text-yellow-800 border-yellow-200' :
+               'bg-red-100 text-red-800 border-red-200'
             }`}>
                XẾP LOẠI: {ranking.toUpperCase()}
             </div>

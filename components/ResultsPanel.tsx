@@ -69,7 +69,12 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({ ratings, selectedMonth, emp
   totalScore = Math.round(totalScore * 100) / 100;
 
   const percent = maxTotalScore > 0 ? Math.round((totalScore / maxTotalScore) * 100) : 0;
-  const ranking = percent >= 95 ? "Xuất sắc" : percent >= 80 ? "Khá/Tốt" : percent >= 50 ? "Trung bình" : "Yếu";
+  
+  // Updated Ranking Logic based on user request
+  // 80-100: Tốt
+  // 60-80: Trung bình
+  // <60: Yếu
+  const ranking = percent >= 80 ? "Tốt" : percent >= 60 ? "Trung bình" : "Yếu";
 
   const COLORS = ['#3b82f6', '#22c55e', '#eab308', '#f97316'];
 
@@ -148,7 +153,7 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({ ratings, selectedMonth, emp
           </div>
           <div className="mt-4 w-full bg-slate-700 h-3 rounded-full overflow-hidden">
             <div 
-              className={`h-full transition-all duration-500 ${percent >= 95 ? 'bg-green-500' : percent >= 80 ? 'bg-blue-500' : 'bg-orange-500'}`} 
+              className={`h-full transition-all duration-500 ${percent >= 80 ? 'bg-green-500' : percent >= 60 ? 'bg-yellow-500' : 'bg-red-500'}`} 
               style={{ width: `${percent}%` }}
             ></div>
           </div>
