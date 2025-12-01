@@ -276,23 +276,13 @@ function App() {
                       <span>In</span>
                     </button>
 
-                    {/* Download PDF Button */}
-                    <button 
-                      onClick={handleDownloadPDF}
-                      disabled={isGeneratingPdf}
-                      className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-lg shadow-emerald-500/30 active:scale-95 border border-emerald-400/30 disabled:opacity-50 disabled:cursor-not-allowed"
-                      title="Tải báo cáo dưới dạng file PDF"
-                    >
-                      {isGeneratingPdf ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
-                      <span className="hidden lg:inline">Tải PDF</span>
-                      <span className="lg:hidden">PDF</span>
-                    </button>
+                    
 
                     <button 
                       onClick={() => setShowPreview(false)}
                       className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all shadow-lg shadow-rose-500/30 active:scale-95 border border-rose-400/30"
                     >
-                      <X size={14} />
+                    
                       <span>Đóng</span>
                     </button>
                   </div>
