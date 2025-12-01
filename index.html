@@ -53,46 +53,31 @@
           margin: 5mm; 
         }
         
-        /* 
-           NUCLEAR OPTION FOR PRINTING
-           Use visibility: hidden on body to hide ALL floating widgets, AI buttons, 
-           and app chrome that might be injected or fixed positioned.
-        */
-        body {
-          visibility: hidden !important;
-          background: white !important;
-          height: auto;
-          width: auto;
-          overflow: visible !important;
-        }
-
-        /* Only make the specific dashboard container visible */
-        #printable-dashboard, #printable-dashboard * {
-          visibility: visible !important;
-        }
-
-        /* Position the dashboard at the top-left of the physical page */
-        #printable-dashboard {
-          position: absolute !important;
-          left: 0 !important;
-          top: 0 !important;
-          width: 210mm !important; /* Force exact A4 width */
+        html, body, #root {
+          width: 100%;
+          height: auto !important;
+          min-height: 100vh;
           margin: 0 !important;
           padding: 0 !important;
-          box-shadow: none !important;
-          z-index: 9999 !important;
+          background: white !important;
           overflow: visible !important;
         }
-        
-        /* Ensure text is always black for printing */
-        * {
+
+        body {
+            /* Removed scaling to prevent content shrinking */
+            width: 100%;
+            color: black !important;
             -webkit-print-color-adjust: exact !important; 
             print-color-adjust: exact !important;
-            color-adjust: exact !important;
         }
 
         /* Hide scrollbars */
         ::-webkit-scrollbar { display: none; }
+        
+        /* Ensure content isn't cut off inside flex containers */
+        * {
+          overflow: visible !important;
+        }
       }
     </style>
   <script type="importmap">
