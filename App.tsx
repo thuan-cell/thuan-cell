@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import InputSection from './components/InputSection';
 import ResultsPanel from './components/ResultsPanel';
 import { EvaluationState, RatingLevel } from './types';
-import { Sun, Moon, User, Building2, Briefcase, IdCard, Calendar, Upload, Image as ImageIcon, Flame, Info, Printer, Download, X, Loader2, Factory, ChevronRight, LayoutDashboard, FileBarChart, History, Settings, Bell, Search } from 'lucide-react';
+import { Sun, Moon, User, Building2, Briefcase, CreditCard, Calendar, Upload, Image as ImageIcon, Flame, Info, Printer, Download, X, Loader2, Factory, ChevronRight, LayoutDashboard, FileBarChart, History, Settings, Bell, Search } from 'lucide-react';
 
 export interface EmployeeInfo {
   name: string;
@@ -368,7 +368,7 @@ function App() {
                     {/* Styled Inputs */}
                     {[
                       { label: 'Họ và tên nhân viên', icon: User, key: 'name', placeholder: 'Nguyễn Văn A' },
-                      { label: 'Mã số nhân viên', icon: IdCard, key: 'id', placeholder: 'NV-001' },
+                      { label: 'Mã số nhân viên', icon: CreditCard, key: 'id', placeholder: 'NV-001' },
                       { label: 'Chức vụ / Vị trí', icon: Briefcase, key: 'position', placeholder: 'Trưởng ca / Vận hành viên' },
                       { label: 'Bộ phận / Phòng ban', icon: Building2, key: 'department', placeholder: 'Phòng Kỹ thuật' },
                     ].map((field) => (
