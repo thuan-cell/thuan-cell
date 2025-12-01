@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đánh Giá KPI Lò Hơi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+            },
+            colors: {
+              slate: { 
+                850: '#1e293b',
+                950: '#020617'
+              },
+              indigo: {
+                950: '#1e1b4b', // Deep indigo for enterprise feel
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <script>
+      // Initialize theme - Defaulting to DARK
+      try {
+        var saved = localStorage.getItem('theme');
+        // If 'dark' is saved OR no preference is saved (default), apply dark mode
+        if (saved === 'dark' || !saved) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {
+        console.error('Error accessing local storage', e);
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+      body { font-family: 'Inter', sans-serif; }
+      
+      /* Smooth scrolling */
+      html { scroll-behavior: smooth; }
+
+      @media print {
+        @page { 
+          size: A4; 
+          margin: 0; /* Important: Clear browser print margins so we control layout with padding */
+        }
+        
+        body {
+          visibility: hidden;
+          margin: 0;
+          padding: 0;
+        }
+
+        /* Target the overlay specifically to override its 'fixed' positioning and scrolling */
+        #print-overlay {
+          visibility: visible !important;
+          display: block !important;
+          position: absolute !important; 
+          top: 0 !important;
+          left: 0 !important;
+          overflow: visible !important; 
+          background: white !important;
+          width: 210mm !important;
+          height: auto !important;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+
+        /* Ensure the dashboard content is visible and reset styles */
+        #printable-dashboard {
+          visibility: visible !important;
+          display: block !important;
+          width: 210mm !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          box-shadow: none !important;
+          transform: none !important; /* Reset screen scaling */
+          overflow: visible !important;
+          background: white !important;
+        }
+
+        #printable-dashboard * {
+          visibility: visible !important;
+        }
+
+        ::-webkit-scrollbar { display: none; }
+        
+        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.5.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.1/package/xlsx.mjs",
+    "vite": "https://aistudiocdn.com/vite@^7.2.4",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 antialiased selection:bg-indigo-500 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
