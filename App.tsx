@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import InputSection from './components/InputSection';
 import ResultsPanel from './components/ResultsPanel';
 import { EvaluationState, RatingLevel } from './types';
-import { Sun, Moon, User, Building2, Briefcase, CreditCard, Calendar, Upload, Image as ImageIcon, Flame, Info, Printer, Download, X, Loader2, Factory, ChevronRight, LayoutDashboard, FileBarChart, History, Settings, Bell, Search } from 'lucide-react';
+import { Sun, Moon, User, Building2, Briefcase, CreditCard, Calendar, Upload, Image as ImageIcon, Flame, Info, Printer, Factory, ChevronRight, Bell, Search } from 'lucide-react';
 
 export interface EmployeeInfo {
   name: string;
@@ -28,7 +28,6 @@ function App() {
   
   // Preview and Print states
   const [showPreview, setShowPreview] = useState(false);
-  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   
   const [employeeInfo, setEmployeeInfo] = useState<EmployeeInfo>({
     name: '',
@@ -99,99 +98,6 @@ function App() {
     setTimeout(() => {
       window.print();
     }, 500);
-  };
-
-  // --- PDF Download Logic ---
-  const handleDownloadPDF = async () => {
-    if (isGeneratingPdf) return;
-    
-    // 1. Ensure preview is visible so DOM exists
-    setShowPreview(true);
-    setIsGeneratingPdf(true);
-
-    // 2. Wait for DOM to fully render the preview content
-    await new Promise(resolve => setTimeout(resolve, 800));
-
-    const element = document.getElementById('printable-dashboard');
-    if (!element) {
-      setIsGeneratingPdf(false);
-      alert("Không tìm thấy nội dung báo cáo. Vui lòng thử lại.");
-      return;
-    }
-
-    try {
-      // 3. Create a temporary container for PDF generation
-      // Position fixed at 0,0 with very low z-index to be invisible but technically "on screen"
-      const container = document.createElement('div');
-      container.style.position = 'fixed'; 
-      container.style.top = '0';
-      container.style.left = '0';
-      // Use pixel width for A4 (210mm @ 96dpi approx 794px) to ensure html2canvas precision
-      container.style.width = '794px'; 
-      container.style.zIndex = '-10000'; 
-      container.style.backgroundColor = '#ffffff'; 
-      
-      // 4. Clone the report
-      const clone = element.cloneNode(true) as HTMLElement;
-      
-      // 5. Clean up the clone's styles to be print-ready
-      // Instead of stripping all classes, we only remove transforms/shadows that affect capture
-      // and enforce white background and full width.
-      clone.classList.remove('shadow-2xl', 'transform', 'scale-75', 'md:scale-90', 'lg:scale-100', 'transition-transform');
-      clone.classList.add('bg-white');
-      
-      // Force exact dimensions and reset all positioning
-      clone.style.width = '794px'; 
-      clone.style.maxWidth = '794px';
-      clone.style.minHeight = '1123px'; // A4 height @ 96dpi
-      clone.style.margin = '0';
-      clone.style.padding = '0';
-      clone.style.position = 'absolute';
-      clone.style.top = '0';
-      clone.style.left = '0';
-      clone.style.transform = 'none';
-      clone.style.boxShadow = 'none';
-      clone.style.overflow = 'hidden';
-
-      container.appendChild(clone);
-      document.body.appendChild(container);
-
-      // 6. Configuration for html2pdf
-      const opt = {
-        margin: 0, 
-        filename: `KPI_BaoCao_${selectedMonth}_${employeeInfo.id || 'NV'}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-          scale: 2, 
-          useCORS: true, 
-          logging: false,
-          scrollY: 0, 
-          scrollX: 0,
-          // Constrain the window width to avoid capturing whitespace from wide screens
-          windowWidth: 800, 
-          width: 794,
-          backgroundColor: '#ffffff'
-        },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-
-      // @ts-ignore
-      if (typeof window.html2pdf !== 'undefined') {
-        // @ts-ignore
-        await window.html2pdf().set(opt).from(clone).save();
-      } else {
-        alert("Thư viện in ấn chưa tải xong. Vui lòng kiểm tra kết nối mạng và thử lại.");
-      }
-      
-      // 7. Cleanup
-      document.body.removeChild(container);
-
-    } catch (err: any) {
-      console.error("PDF generation failed", err);
-      alert("Có lỗi xảy ra khi tạo PDF: " + (err.message || "Lỗi không xác định"));
-    } finally {
-      setIsGeneratingPdf(false);
-    }
   };
 
   return (
@@ -266,23 +172,21 @@ function App() {
                 {showPreview && (
                   <div className="hidden md:flex items-center gap-2 animate-in fade-in slide-in-from-right-8 duration-300 border-r border-white/10 pr-4 mr-2">
                     
-                    {/* Print / Select Printer Button */}
+                    {/* Print Button */}
                     <button 
                       onClick={handlePrint}
                       className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-lg shadow-indigo-500/30 active:scale-95 border border-indigo-400/30"
-                      title="Mở hộp thoại in của hệ thống để chọn máy in"
+                      title="Mở hộp thoại in của hệ thống"
                     >
                       <Printer size={14} />
                       <span>In</span>
                     </button>
 
-                    
-
+                    {/* Close Preview Button */}
                     <button 
                       onClick={() => setShowPreview(false)}
                       className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all shadow-lg shadow-rose-500/30 active:scale-95 border border-rose-400/30"
                     >
-                    
                       <span>Đóng</span>
                     </button>
                   </div>
