@@ -54,8 +54,8 @@
           margin: 0mm; 
         }
         
-        html, body {
-          width: 210mm;
+        html, body, #root {
+          width: 100%;
           height: auto !important;
           min-height: 100vh;
           margin: 0 !important;
@@ -73,6 +73,11 @@
 
         /* Hide scrollbars */
         ::-webkit-scrollbar { display: none; }
+        
+        /* Ensure content isn't cut off inside flex containers */
+        * {
+          overflow: visible !important;
+        }
       }
     </style>
   <script type="importmap">

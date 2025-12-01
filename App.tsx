@@ -135,8 +135,10 @@ function App() {
       const clone = element.cloneNode(true) as HTMLElement;
       
       // 5. Clean up the clone's styles to be print-ready
-      // Remove ALL classes that might cause scaling/margins
-      clone.className = 'bg-white'; 
+      // Instead of stripping all classes, we only remove transforms/shadows that affect capture
+      // and enforce white background and full width.
+      clone.classList.remove('shadow-2xl', 'transform', 'scale-75', 'md:scale-90', 'lg:scale-100', 'transition-transform');
+      clone.classList.add('bg-white');
       
       // Force exact dimensions and reset all positioning
       clone.style.width = '794px'; 
@@ -193,9 +195,10 @@ function App() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-indigo-500/30 print:bg-white print:h-auto print:overflow-visible transition-colors duration-300 overflow-hidden relative">
+    // Added print:overflow-visible, print:h-auto, print:static to fix clipping issues
+    <div className="h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-indigo-500/30 print:bg-white print:h-auto print:overflow-visible print:static transition-colors duration-300 overflow-hidden relative">
       
-      {/* Premium Background Gradient Mesh */}
+      {/* Premium Background Gradient Mesh - Hidden on print */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none print:hidden">
          <div className="absolute top-[-10%] right-[-5%] w-[50%] h-[50%] bg-gradient-to-b from-indigo-200/20 to-transparent dark:from-indigo-900/10 rounded-full blur-3xl opacity-60"></div>
          <div className="absolute bottom-[-10%] left-[-5%] w-[50%] h-[50%] bg-gradient-to-t from-blue-200/20 to-transparent dark:from-blue-900/10 rounded-full blur-3xl opacity-60"></div>
@@ -319,8 +322,8 @@ function App() {
       </header>
 
       {/* Main Content - Full Height Flex Container */}
-      <main className="flex-1 relative z-10 w-full max-w-[1920px] mx-auto overflow-hidden print:overflow-visible print:h-auto">
-        <div className="flex flex-col xl:flex-row h-full">
+      <main className="flex-1 relative z-10 w-full max-w-[1920px] mx-auto overflow-hidden print:overflow-visible print:h-auto print:block">
+        <div className="flex flex-col xl:flex-row h-full print:block">
           
           {/* Left Column: Form & Inputs - Scrollable Independently */}
           <div className="flex-1 order-2 xl:order-1 print:hidden min-w-0 h-full overflow-y-auto scroll-smooth custom-scrollbar">
@@ -482,8 +485,8 @@ function App() {
           </div>
 
           {/* Right Column: Results & Tools - Sticky Side on Desktop */}
-          <div className="w-full xl:w-[420px] 2xl:w-[480px] order-1 xl:order-2 print:w-full flex-shrink-0 bg-white/50 dark:bg-slate-900/20 xl:bg-transparent xl:h-full flex flex-col border-l border-slate-200/50 dark:border-slate-800/50 overflow-hidden backdrop-blur-sm xl:backdrop-blur-none">
-             <div className="p-3 md:p-4 w-full h-full flex flex-col">
+          <div className="w-full xl:w-[420px] 2xl:w-[480px] order-1 xl:order-2 print:w-full print:block flex-shrink-0 bg-white/50 dark:bg-slate-900/20 xl:bg-transparent xl:h-full flex flex-col border-l border-slate-200/50 dark:border-slate-800/50 overflow-hidden backdrop-blur-sm xl:backdrop-blur-none print:bg-white print:border-none print:overflow-visible">
+             <div className="p-3 md:p-4 w-full h-full flex flex-col print:p-0 print:h-auto">
                 <ResultsPanel 
                   ratings={ratings} 
                   selectedMonth={selectedMonth} 

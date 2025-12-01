@@ -68,7 +68,7 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({
       shortName: shortName,
       score: catScore, 
       max: catMax, 
-      percentage: percentage,
+      percentage: percentage, 
       fullMark: 100 
     };
   });
@@ -257,16 +257,17 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({
 
       {/* 
         PREVIEW / PRINTABLE AREA 
-        Updated print classes to force absolute positioning at top-left, 
+        Updated print classes to force absolute positioning at top-left of the BODY,
         ensuring it captures the full A4 size without parent overflow constraints.
+        Removed 'hidden' from print conditional logic to rely on print:block.
       */}
       <div 
         id="print-overlay" 
-        className={`${showPreview ? "fixed inset-0 z-40 bg-slate-900/90 backdrop-blur-sm overflow-y-auto p-4 md:p-8 flex justify-center animate-in fade-in duration-200" : "hidden"} print:block print:absolute print:inset-0 print:bg-white print:p-0 print:z-50 print:overflow-visible print:w-full print:h-auto`}
+        className={`${showPreview ? "fixed inset-0 z-40 bg-slate-900/90 backdrop-blur-sm overflow-y-auto p-4 md:p-8 flex justify-center animate-in fade-in duration-200" : "hidden"} print:block print:absolute print:top-0 print:left-0 print:w-full print:h-auto print:bg-white print:p-0 print:m-0 print:z-[100] print:overflow-visible`}
       >
          <div 
            id="printable-dashboard" 
-           className="bg-white shadow-2xl w-[210mm] min-h-[297mm] origin-top transform scale-75 md:scale-90 lg:scale-100 transition-transform print:transform-none print:shadow-none print:mx-auto print:w-[210mm]"
+           className="bg-white shadow-2xl w-[210mm] min-h-[297mm] origin-top transform scale-75 md:scale-90 lg:scale-100 transition-transform print:transform-none print:shadow-none print:m-0 print:w-[210mm] print:h-auto"
          >
             <DashboardReport 
               ratings={ratings}
