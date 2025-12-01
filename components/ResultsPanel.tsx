@@ -258,8 +258,9 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({
       {/* 
         PREVIEW / PRINTABLE AREA 
         Added ID 'print-overlay' for better print targeting
+        Added print:* classes to ensure it displays correctly during print
       */}
-      <div id="print-overlay" className={showPreview ? "fixed inset-0 z-40 bg-slate-900/90 backdrop-blur-sm overflow-y-auto p-4 md:p-8 flex justify-center animate-in fade-in duration-200" : "hidden"}>
+      <div id="print-overlay" className={`${showPreview ? "fixed inset-0 z-40 bg-slate-900/90 backdrop-blur-sm overflow-y-auto p-4 md:p-8 flex justify-center animate-in fade-in duration-200" : "hidden"} print:bg-white print:p-0 print:block print:static`}>
          <div id="printable-dashboard" className="bg-white shadow-2xl w-[210mm] min-h-[297mm] origin-top transform scale-75 md:scale-90 lg:scale-100 transition-transform">
             <DashboardReport 
               ratings={ratings}
