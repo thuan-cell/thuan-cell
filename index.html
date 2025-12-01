@@ -63,11 +63,9 @@
           overflow: visible !important;
         }
 
-        /* Scale down slightly to ensure fit regardless of printer margins */
         body {
-            transform: scale(0.95);
-            transform-origin: top left;
-            width: 105.2%; /* Compensate for the scale down to fill width */
+            /* Removed scaling to prevent content shrinking */
+            width: 100%;
             color: black !important;
             -webkit-print-color-adjust: exact !important; 
             print-color-adjust: exact !important;

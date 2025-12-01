@@ -49,14 +49,17 @@ const DashboardReport: React.FC<DashboardReportProps> = ({
       {/* --- HEADER --- */}
       <div className="flex border-b-2 border-slate-900 pb-3 mb-3 print:pb-2 print:mb-2 items-center">
         <div className="w-1/4 flex flex-col items-center justify-center border-r border-slate-200 pr-4">
-           {/* LOGO AREA */}
-           <img 
-              src={logoUrl || "https://placehold.co/400x150/ffffff/0047AB?text=TRIVIET+BIOGEN&font=poppins"} 
-              alt="Logo" 
-              className="w-full max-h-16 object-contain"
-           />
-           {!logoUrl && (
-             <div className="text-[7px] text-green-600 mt-1 font-bold uppercase tracking-widest text-center">Năng lượng sạch, vì một tương lai xanh</div>
+           {/* LOGO AREA - Only show if logoUrl exists */}
+           {logoUrl ? (
+             <img 
+                src={logoUrl} 
+                alt="Logo" 
+                className="w-full max-h-16 object-contain"
+             />
+           ) : (
+             <div className="h-16 w-full flex items-center justify-center">
+                {/* Empty space if no logo is uploaded */}
+             </div>
            )}
         </div>
         <div className="w-3/4 pl-5 flex flex-col justify-center">
