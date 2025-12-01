@@ -193,16 +193,16 @@ function App() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-indigo-500/30 print:bg-white transition-colors duration-300 overflow-hidden relative">
+    <div className="h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-indigo-500/30 print:bg-white print:h-auto print:overflow-visible transition-colors duration-300 overflow-hidden relative">
       
       {/* Premium Background Gradient Mesh */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none no-print">
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none print:hidden">
          <div className="absolute top-[-10%] right-[-5%] w-[50%] h-[50%] bg-gradient-to-b from-indigo-200/20 to-transparent dark:from-indigo-900/10 rounded-full blur-3xl opacity-60"></div>
          <div className="absolute bottom-[-10%] left-[-5%] w-[50%] h-[50%] bg-gradient-to-t from-blue-200/20 to-transparent dark:from-blue-900/10 rounded-full blur-3xl opacity-60"></div>
       </div>
 
       {/* Header - Enterprise Design */}
-      <header className="shrink-0 z-50 w-full bg-slate-900 text-white border-b border-white/10 no-print sticky top-0 shadow-2xl shadow-black/50 relative overflow-hidden">
+      <header className="shrink-0 z-50 w-full bg-slate-900 text-white border-b border-white/10 print:hidden sticky top-0 shadow-2xl shadow-black/50 relative overflow-hidden">
         
         {/* Top Accent Gradient */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-400 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
@@ -319,11 +319,11 @@ function App() {
       </header>
 
       {/* Main Content - Full Height Flex Container */}
-      <main className="flex-1 relative z-10 w-full max-w-[1920px] mx-auto overflow-hidden">
+      <main className="flex-1 relative z-10 w-full max-w-[1920px] mx-auto overflow-hidden print:overflow-visible print:h-auto">
         <div className="flex flex-col xl:flex-row h-full">
           
           {/* Left Column: Form & Inputs - Scrollable Independently */}
-          <div className="flex-1 order-2 xl:order-1 no-print min-w-0 h-full overflow-y-auto scroll-smooth custom-scrollbar">
+          <div className="flex-1 order-2 xl:order-1 print:hidden min-w-0 h-full overflow-y-auto scroll-smooth custom-scrollbar">
             <div className="p-4 md:p-8 space-y-6 max-w-5xl mx-auto">
               
               {/* Employee Info Card - Premium Look */}

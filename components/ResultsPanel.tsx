@@ -98,7 +98,7 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({
 
   return (
     <>
-      <div className={`flex flex-col h-full gap-3 transition-all duration-500 ease-out ${showPreview ? 'opacity-0 translate-x-10 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`flex flex-col h-full gap-3 transition-all duration-500 ease-out ${showPreview ? 'opacity-0 translate-x-10 pointer-events-none' : 'opacity-100'} print:hidden`}>
         
         {/* HERO CARD - Premium Design */}
         <div className="shrink-0 rounded-2xl shadow-lg shadow-indigo-500/10 dark:shadow-black/40 overflow-hidden relative group ring-1 ring-black/5 dark:ring-white/10">
@@ -257,11 +257,17 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({
 
       {/* 
         PREVIEW / PRINTABLE AREA 
-        Added ID 'print-overlay' for better print targeting
-        Added print:* classes to ensure it displays correctly during print
+        Updated print classes to force absolute positioning at top-left, 
+        ensuring it captures the full A4 size without parent overflow constraints.
       */}
-      <div id="print-overlay" className={`${showPreview ? "fixed inset-0 z-40 bg-slate-900/90 backdrop-blur-sm overflow-y-auto p-4 md:p-8 flex justify-center animate-in fade-in duration-200" : "hidden"} print:bg-white print:p-0 print:block print:static`}>
-         <div id="printable-dashboard" className="bg-white shadow-2xl w-[210mm] min-h-[297mm] origin-top transform scale-75 md:scale-90 lg:scale-100 transition-transform">
+      <div 
+        id="print-overlay" 
+        className={`${showPreview ? "fixed inset-0 z-40 bg-slate-900/90 backdrop-blur-sm overflow-y-auto p-4 md:p-8 flex justify-center animate-in fade-in duration-200" : "hidden"} print:block print:absolute print:inset-0 print:bg-white print:p-0 print:z-50 print:overflow-visible print:w-full print:h-auto`}
+      >
+         <div 
+           id="printable-dashboard" 
+           className="bg-white shadow-2xl w-[210mm] min-h-[297mm] origin-top transform scale-75 md:scale-90 lg:scale-100 transition-transform print:transform-none print:shadow-none print:mx-auto print:w-[210mm]"
+         >
             <DashboardReport 
               ratings={ratings}
               selectedMonth={selectedMonth}
