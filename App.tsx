@@ -273,8 +273,7 @@ function App() {
                       title="Mở hộp thoại in của hệ thống để chọn máy in"
                     >
                       <Printer size={14} />
-                      <span className="hidden lg:inline">In / Chọn máy in</span>
-                      <span className="lg:hidden">In</span>
+                      <span>In</span>
                     </button>
 
                     {/* Download PDF Button */}
@@ -291,7 +290,7 @@ function App() {
 
                     <button 
                       onClick={() => setShowPreview(false)}
-                      className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 hover:bg-white/10 text-slate-300 text-xs font-bold transition-all active:scale-95"
+                      className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all shadow-lg shadow-rose-500/30 active:scale-95 border border-rose-400/30"
                     >
                       <X size={14} />
                       <span>Đóng</span>
@@ -372,7 +371,7 @@ function App() {
                     {[
                       { label: 'Họ và tên nhân viên', icon: User, key: 'name', placeholder: 'Nguyễn Văn A' },
                       { label: 'Mã số nhân viên', icon: CreditCard, key: 'id', placeholder: 'NV-001' },
-                      { label: 'Chức vụ / Vị trí', icon: Briefcase, key: 'position', placeholder: 'Trưởng ca / Vận hành viên' },
+                      { label: 'Chức vụ / Vị trí', icon: Briefcase, key: 'position', placeholder: 'Trưởng cụm/trưởng ca' },
                       { label: 'Bộ phận / Phòng ban', icon: Building2, key: 'department', placeholder: 'Phòng Kỹ thuật' },
                     ].map((field) => (
                       <div key={field.key} className="space-y-1.5 group/input">
