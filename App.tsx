@@ -3,7 +3,7 @@ import InputSection from './components/InputSection';
 import ResultsPanel from './components/ResultsPanel';
 import { EvaluationState, RatingLevel } from './types';
 import { KPI_DATA } from './constants';
-import { Sun, Moon, User, Building2, Briefcase, IdCard, Calendar, Upload, Image as ImageIcon, Flame, Info, Printer, Download, X, Loader2, Factory, ChevronRight } from 'lucide-react';
+import { Sun, Moon, User, Building2, Briefcase, CreditCard, Calendar, Upload, Image as ImageIcon, Flame, Info, Printer, Download, X, Loader2, Factory, ChevronRight } from 'lucide-react';
 import DashboardReport from './components/DashboardReport';
 
 export interface EmployeeInfo {
@@ -338,7 +338,7 @@ function App() {
                         </label>
                         <div className="relative">
                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within/input:text-indigo-500 transition-colors">
-                             <IdCard size={18} />
+                             <CreditCard size={18} />
                            </div>
                            <input 
                              type="text" 
