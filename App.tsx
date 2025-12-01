@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import InputSection from './components/InputSection';
 import ResultsPanel from './components/ResultsPanel';
+import DashboardReport from './components/DashboardReport';
 import { EvaluationState, RatingLevel } from './types';
 import { Sun, Moon, User, Building2, Briefcase, CreditCard, Calendar, Upload, Image as ImageIcon, Flame, Info, Printer, Download, X, Loader2, Factory, ChevronRight, LayoutDashboard, FileBarChart, History, Settings, Bell, Search } from 'lucide-react';
 
@@ -514,6 +515,26 @@ function App() {
           background-color: rgba(156, 163, 175, 0.5);
         }
       `}</style>
+
+      {/* 
+        PREVIEW / PRINTABLE AREA 
+        Added print:bg-white and other overrides to ensure clean printing
+      */}
+      <div id="print-overlay" className={`${showPreview ? "fixed inset-0 z-40 bg-slate-900/90 backdrop-blur-sm overflow-y-auto p-4 md:p-8 flex justify-center animate-in fade-in duration-200" : "hidden"} print:bg-white print:p-0 print:block print:static`}>
+         <div id="printable-dashboard" className="bg-white shadow-2xl w-[210mm] min-h-[297mm] origin-top transform scale-75 md:scale-90 lg:scale-100 transition-transform">
+            <DashboardReport 
+              ratings={ratings}
+              selectedMonth={selectedMonth}
+              employeeInfo={employeeInfo}
+              logoUrl={companyLogo}
+              totalScore={0}
+              maxTotalScore={0}
+              percent={0}
+              ranking={""}
+              categoryScores={[]}
+            />
+         </div>
+      </div>
     </div>
   );
 }
